@@ -20,6 +20,16 @@ The project currently focuses on **Madurai, Tamil Nadu**, using historical weath
 - Present weather analysis and recommendation results through an interactive dashboard.
 - Support better renewable energy planning and resource utilization.
 
+- ## Application Screenshots
+
+### RenewableAI Dashboard
+
+![RenewableAI Dashboard](outputs/renewableai_dashboard.png)
+
+### Energy Recommendation Results
+
+![RenewableAI Recommendation](outputs/renewableai_recommendation.png)
+
 ## 3. Features
 
 ### Weather Data Analysis
