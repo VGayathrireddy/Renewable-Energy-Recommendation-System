@@ -1,0 +1,428 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RenewableAI | Energy Recommendation System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">☀</span>
+                <span>Renewable<span class="logo-highlight">AI</span></span>
+            </div>
+
+            <div class="nav-label">
+                Renewable Energy Recommendation System
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Main Container -->
+    <main class="container">
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <span class="tag">AI-POWERED ENERGY PLANNING</span>
+
+            <h1>
+                Smarter Energy Decisions for a
+                <span>Sustainable Future</span>
+            </h1>
+
+            <p>
+                Analyze weather conditions, estimate renewable energy
+                generation and discover a suitable energy source
+                based on your daily electricity requirements.
+            </p>
+
+            <div class="hero-location">
+                <span>📍</span>
+                <span>Madurai, Tamil Nadu</span>
+            </div>
+        </section>
+
+
+        <!-- Recommendation Input Section -->
+        <section class="analysis-layout">
+
+            <!-- Input Card -->
+            <div class="input-card">
+
+                <div class="card-icon">⚡</div>
+
+                <h2>Energy Recommendation</h2>
+
+                <p>
+                    Enter your daily electricity requirement
+                    to receive an energy recommendation.
+                </p>
+
+                <label for="demand">
+                    Daily Electricity Demand
+                </label>
+
+                <div class="input-wrapper">
+                    <input
+                        type="number"
+                        id="demand"
+                        placeholder="Example: 10"
+                        min="0.1"
+                        step="0.1"
+                    >
+
+                    <span>kWh/day</span>
+                </div>
+
+                <button
+                    type="button"
+                    id="recommendBtn"
+                    onclick="getRecommendation()"
+                >
+                    Analyze & Recommend <span>→</span>
+                </button>
+
+                <p id="errorMessage" class="error-message"></p>
+
+                <div class="input-note">
+                    <span>ⓘ</span>
+                    Enter your estimated daily electricity consumption.
+                </div>
+
+            </div>
+
+
+            <!-- Project Overview Card -->
+            <div class="overview-card">
+
+                <span class="tag">PROJECT OVERVIEW</span>
+
+                <h2>How RenewableAI Works</h2>
+
+                <p>
+                    The system uses historical weather information
+                    and machine learning models to estimate renewable
+                    energy potential and recommend a suitable source.
+                </p>
+
+                <div class="process-list">
+
+                    <div class="process-item">
+                        <div class="process-number">01</div>
+                        <div>
+                            <h3>Weather Data Analysis</h3>
+                            <p>
+                                Studies sunlight, temperature,
+                                humidity and wind speed.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="process-item">
+                        <div class="process-number">02</div>
+                        <div>
+                            <h3>Energy Prediction</h3>
+                            <p>
+                                Estimates solar generation and
+                                predicts wind speed using ML models.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="process-item">
+                        <div class="process-number">03</div>
+                        <div>
+                            <h3>Energy Recommendation</h3>
+                            <p>
+                                Compares estimated solar availability
+                                with the user's electricity demand.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Historical Weather Analytics Section -->
+        <section id="analyticsSection" class="analytics-section">
+
+            <div class="section-heading">
+
+                <span class="tag">HISTORICAL WEATHER ANALYSIS</span>
+
+                <h2>Weather & Energy Analytics</h2>
+
+                <p>
+                    Explore monthly weather patterns and estimated
+                    solar energy generation using historical NASA
+                    POWER data.
+                </p>
+
+                <small id="analyticsPeriod">
+                    Loading historical data...
+                </small>
+
+            </div>
+
+
+            <!-- Analytics Summary Cards -->
+            <div class="analytics-summary">
+
+                <div class="summary-card">
+                    <span>☀</span>
+                    <p>Average Solar Radiation</p>
+                    <h3 id="avgSolar">--</h3>
+                    <small>kWh/m²/day</small>
+                </div>
+
+                <div class="summary-card">
+                    <span>🌡</span>
+                    <p>Average Temperature</p>
+                    <h3 id="avgTemperature">--</h3>
+                    <small>°C</small>
+                </div>
+
+                <div class="summary-card">
+                    <span>〰</span>
+                    <p>Average Wind Speed</p>
+                    <h3 id="avgWind">--</h3>
+                    <small>m/s</small>
+                </div>
+
+                <div class="summary-card">
+                    <span>⚡</span>
+                    <p>Average Solar Generation</p>
+                    <h3 id="avgGeneration">--</h3>
+                    <small>kWh/day (estimated)</small>
+                </div>
+
+            </div>
+
+
+            <!-- Analytics Charts -->
+            <div class="charts-grid">
+
+                <div class="chart-card">
+                    <h3>Monthly Solar Radiation</h3>
+                    <p>
+                        Average daily solar radiation across each month
+                    </p>
+
+                    <div class="chart-container">
+                        <canvas id="solarChart"></canvas>
+                    </div>
+                </div>
+
+
+                <div class="chart-card">
+                    <h3>Monthly Temperature</h3>
+                    <p>
+                        Average monthly temperature in Celsius
+                    </p>
+
+                    <div class="chart-container">
+                        <canvas id="temperatureChart"></canvas>
+                    </div>
+                </div>
+
+
+                <div class="chart-card">
+                    <h3>Monthly Wind Speed</h3>
+                    <p>
+                        Average daily wind speed at 10 metres
+                    </p>
+
+                    <div class="chart-container">
+                        <canvas id="windChart"></canvas>
+                    </div>
+                </div>
+
+
+                <div class="chart-card">
+                    <h3>Estimated Solar Generation</h3>
+                    <p>
+                        Average estimated solar electricity
+                        generation per day
+                    </p>
+
+                    <div class="chart-container">
+                        <canvas id="generationChart"></canvas>
+                    </div>
+                </div>
+
+            </div>
+
+            <p id="analyticsError" class="error-message"></p>
+
+
+            <!-- Data Source Information -->
+            <div class="analytics-source">
+
+                <strong>Data Source: NASA POWER</strong>
+
+                <p>
+                    Charts display historical monthly averages.
+                    Solar generation is estimated using assumed
+                    solar panel specifications. Wind speed is a
+                    weather measurement, not electricity generation.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- Recommendation Results Section -->
+        <section id="resultsSection" class="results-section hidden">
+
+            <div class="section-heading">
+                <span class="tag">ANALYSIS RESULTS</span>
+                <h2>Your Energy Recommendation</h2>
+                <p>
+                    Results based on the entered electricity demand
+                    and available weather information.
+                </p>
+            </div>
+
+
+            <!-- Main Recommendation -->
+            <div class="recommendation-card">
+
+                <div class="recommendation-icon">🌱</div>
+
+                <div>
+                    <span class="recommendation-label">
+                        RECOMMENDED ENERGY SOURCE
+                    </span>
+
+                    <h2 id="recommendedEnergy">
+                        Solar Energy
+                    </h2>
+
+                    <p id="recommendationReason"></p>
+                </div>
+
+            </div>
+
+
+            <!-- Metrics -->
+            <div class="metrics-grid">
+
+                <div class="metric-card">
+                    <span class="metric-icon">⚡</span>
+                    <p>Daily Electricity Demand</p>
+                    <h3>
+                        <span id="demandResult">--</span>
+                        <small>kWh</small>
+                    </h3>
+                </div>
+
+                <div class="metric-card">
+                    <span class="metric-icon">☀</span>
+                    <p>Predicted Solar Generation</p>
+                    <h3>
+                        <span id="solarResult">--</span>
+                        <small>kWh</small>
+                    </h3>
+                </div>
+
+                <div class="metric-card">
+                    <span class="metric-icon">〰</span>
+                    <p>Predicted Wind Speed</p>
+                    <h3>
+                        <span id="windResult">--</span>
+                        <small>m/s</small>
+                    </h3>
+                </div>
+
+                <div class="metric-card">
+                    <span class="metric-icon">📊</span>
+                    <p>Solar Demand Coverage</p>
+                    <h3>
+                        <span id="coverageResult">--</span>
+                    </h3>
+                </div>
+
+            </div>
+
+
+            <!-- Additional Details -->
+            <div class="details-card">
+
+                <h3>Additional Information</h3>
+
+                <div class="details-grid">
+
+                    <div class="detail-item">
+                        <span>Location</span>
+                        <strong id="locationResult">--</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span>Weather Data Date</span>
+                        <strong id="dateResult">--</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span>Wind Potential Index</span>
+                        <strong id="windIndexResult">--</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span>Solar Coverage</span>
+                        <strong id="coverageDetail">--</strong>
+                    </div>
+
+                </div>
+
+                <div class="result-note">
+                    <strong>Important Note</strong>
+                    <p id="resultNote"></p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="logo">
+                <span class="logo-icon">☀</span>
+                <span>Renewable<span class="logo-highlight">AI</span></span>
+            </div>
+
+            <p>
+                AI-powered renewable energy analysis and recommendation.
+            </p>
+
+            <small>
+                Academic Project | Renewable Energy Recommendation System
+            </small>
+        </footer>
+
+    </main>
+
+
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Dashboard JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>
